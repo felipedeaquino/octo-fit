@@ -1,4 +1,5 @@
 import express from 'express';
+import { pathToFileURL } from 'node:url';
 import usersRouter from './routes/users.js';
 import teamsRouter from './routes/teams.js';
 import activitiesRouter from './routes/activities.js';
@@ -13,7 +14,7 @@ function getPublicBaseUrl() {
         : `http://localhost:${PORT}`;
 }
 const PUBLIC_URL = getPublicBaseUrl();
-const app = express();
+export const app = express();
 app.use(express.json());
 // Mount API routers
 app.use('/api/users', usersRouter);
@@ -22,7 +23,7 @@ app.use('/api/activities', activitiesRouter);
 app.use('/api/leaderboard', leaderboardRouter);
 app.use('/api/workouts', workoutsRouter);
 app.get('/', (_req, res) => res.json({ status: 'ok', api: `${PUBLIC_URL}/api` }));
-async function start() {
+export async function startServer() {
     try {
         await connectDatabase(MONGO_URL);
         console.log('Connected to MongoDB', MONGO_URL);
@@ -33,5 +34,8 @@ async function start() {
         process.exit(1);
     }
 }
-start();
+const isMainModule = process.argv[1] !== undefined && import.meta.url === pathToFileURL(process.argv[1]).href;
+if (isMainModule) {
+    startServer();
+}
 //# sourceMappingURL=index.js.map
