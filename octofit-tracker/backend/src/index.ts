@@ -7,7 +7,7 @@ import leaderboardRouter from './routes/leaderboard.js'
 import workoutsRouter from './routes/workouts.js'
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 8000
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/octofit'
+const MONGO_URL = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/octofit_db'
 
 // Codespaces-aware public URL (if CODESPACE_NAME set, GitHub provides a preview URL)
 const CODESPACE_NAME = process.env.CODESPACE_NAME
