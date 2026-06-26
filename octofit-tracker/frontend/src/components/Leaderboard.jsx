@@ -43,4 +43,4 @@ export default function Leaderboard() {
   )
 }
 
-// TODO: usar https://scaling-umbrella-8000.app.github.dev/api/leaderbord
+// TODO: usar https://scaling-umbrella-8000.app.github.dev/api/leaderboard
