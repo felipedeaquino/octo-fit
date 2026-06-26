@@ -42,3 +42,5 @@ export default function Activities() {
     </section>
   )
 }
+
+// TODO: usar https://scaling-umbrella-8000.app.github.dev/api/activities

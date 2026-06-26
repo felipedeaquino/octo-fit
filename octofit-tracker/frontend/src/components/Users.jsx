@@ -42,3 +42,5 @@ export default function Users() {
     </section>
   )
 }
+
+// TODO: usar https://scaling-umbrella-8000.app.github.dev/api/users
