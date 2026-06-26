@@ -1,13 +1,12 @@
 import express from 'express'
-import mongoose from 'mongoose'
 import usersRouter from './routes/users.js'
 import teamsRouter from './routes/teams.js'
 import activitiesRouter from './routes/activities.js'
 import leaderboardRouter from './routes/leaderboard.js'
 import workoutsRouter from './routes/workouts.js'
+import { connectDatabase, MONGO_URL } from './config/database.js'
 
 const PORT = process.env.PORT ? Number(process.env.PORT) : 8000
-const MONGO_URL = process.env.MONGO_URL || 'mongodb://127.0.0.1:27017/octofit_db'
 
 // Codespaces-aware public URL (if CODESPACE_NAME set, GitHub provides a preview URL)
 const CODESPACE_NAME = process.env.CODESPACE_NAME
@@ -29,7 +28,7 @@ app.get('/', (_req, res) => res.json({ status: 'ok', api: `${PUBLIC_URL}/api` })
 
 async function start() {
   try {
-    await mongoose.connect(MONGO_URL)
+    await connectDatabase(MONGO_URL)
     console.log('Connected to MongoDB', MONGO_URL)
     app.listen(PORT, '0.0.0.0', () => console.log(`Server listening on ${PUBLIC_URL}`))
   } catch (err) {
