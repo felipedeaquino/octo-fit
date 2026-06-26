@@ -6,11 +6,13 @@ import leaderboardRouter from './routes/leaderboard.js';
 import workoutsRouter from './routes/workouts.js';
 import { connectDatabase, MONGO_URL } from './config/database.js';
 const PORT = process.env.PORT ? Number(process.env.PORT) : 8000;
-// Codespaces-aware public URL (if CODESPACE_NAME set, GitHub provides a preview URL)
-const CODESPACE_NAME = process.env.CODESPACE_NAME;
-const PUBLIC_URL = CODESPACE_NAME
-    ? `https://${CODESPACE_NAME}-${PORT}.githubpreview.dev`
-    : `http://localhost:${PORT}`;
+function getPublicBaseUrl() {
+    const codespaceName = process.env.CODESPACE_NAME;
+    return codespaceName
+        ? `https://${codespaceName}-${PORT}.app.github.dev`
+        : `http://localhost:${PORT}`;
+}
+const PUBLIC_URL = getPublicBaseUrl();
 const app = express();
 app.use(express.json());
 // Mount API routers
